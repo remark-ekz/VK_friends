@@ -37,6 +37,7 @@ class CreateListRetrieveDestroyViewSet(
         viewsets.GenericViewSet):
     pass
 
+
 class CreateListRetrieveViewSet(
         mixins.CreateModelMixin,
         mixins.ListModelMixin,
@@ -52,6 +53,7 @@ class ListViewSet(
 
 
 class CustomUserViewSet(CreateListRetrieveViewSet):
+    """Вьюсет для пользователей"""
     queryset = User.objects.all()
     serializer_class = CustomUserSerializer
     permission_classes = [AllowAny, ]
@@ -73,6 +75,7 @@ class CustomUserViewSet(CreateListRetrieveViewSet):
 
 
 class FriendViewSet(ListViewSet):
+    """Вьюсет для списка друзей"""
     serializer_class = FriendSerializer
     permission_classes = [IsAuthenticated, ]
 
@@ -83,6 +86,7 @@ class FriendViewSet(ListViewSet):
 
     
 class UserFriendDeleteViewSet(viewsets.ViewSet):
+    """Вьюсет для удаления друга"""
     permission_classes = (IsAuthenticated,)
 
     def destroy(self, request, username):
@@ -106,6 +110,7 @@ class UserFriendDeleteViewSet(viewsets.ViewSet):
 
 
 class OutgoingRequestViewSet(CreateListRetrieveDestroyViewSet):
+    """Вьюсет для исходящей заявки"""
     serializer_class = OutgoingRequestSerializer
     permission_classes = [IsAuthenticated, ]
 
@@ -120,6 +125,7 @@ class OutgoingRequestViewSet(CreateListRetrieveDestroyViewSet):
 
 
 class IncomingRequestViewSet(UpdateListRetrieveDestroyViewSet):
+    """Вьюсет для входящей заявки"""
     serializer_class = IncomingRequestSerializer
     permission_classes = [IsAuthenticated, ]
 

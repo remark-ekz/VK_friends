@@ -96,7 +96,7 @@ class FriendSerializer(serializers.ModelSerializer):
 
 
 class OutgoingRequestSerializer(serializers.ModelSerializer):
-    """Сериализатор заявки"""
+    """Сериализатор исходящей заявки"""
     offer = CustomUserSerializer(read_only=True)
     accept = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
@@ -111,7 +111,6 @@ class OutgoingRequestSerializer(serializers.ModelSerializer):
         )
 
     def create(self, validated_data):
-        # accept_id = validated_data['accept']
         accept_user = User.objects.get(username=validated_data['accept'])
         offer_user = validated_data['offer']
         offer = Friend.objects.get(user=offer_user)
@@ -137,7 +136,7 @@ class OutgoingRequestSerializer(serializers.ModelSerializer):
 
 
 class IncomingRequestSerializer(serializers.ModelSerializer):
-    """Сериализатор заявки"""
+    """Сериализатор входящей заявки"""
     offer = CustomUserSerializer(read_only=True)
     accept = CustomUserSerializer(read_only=True)
 
